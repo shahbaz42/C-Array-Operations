@@ -1,4 +1,22 @@
 # include <stdio.h>
+# include <stdlib.h>
+
+int *A ;
+int sizeArr;
+
+void createArr()
+{
+    printf("Enter the size of your array : ");                // prompt
+    scanf("%d", &sizeArr);
+
+    A = (int*) malloc(sizeArr*sizeof(int));
+
+    if (A == NULL){
+        printf("Unable to create array.\n");
+    }
+    else
+        printf("Sucessfully created array.\n");
+}
 
 void scanA(int arr[], int size)
 {
@@ -21,17 +39,10 @@ void printA(int arr[], int size)
 }
 
 int main(int argc, char *argv[])                            // Driver code
-{
-    int size;
-    printf("Enter the size of an array : ");                // prompt
-    scanf("%d", &size);
-
-    int arr[size];                                          // creating array of required size
+{   
+    int n;
+    createArr();
+    scanA(A, sizeArr);
+    printA(A, sizeArr);
     
-    scanA(arr, size);
-    printf("Enter elements of your array__ \n");
-    
-
-    printA(arr, size);
-
 }

@@ -102,12 +102,25 @@ void selectionSort(int arr[])
     }
 }
 
+void bubbleSort(int arr[])
+{
+   int i, j;
+   for (i = 0; i < sizeArr-1; i++)      
+         
+       for (j = 0; j < sizeArr-i-1; j++)    // Last i elements are already in place 
+           if (arr[j] > arr[j+1]){          // if current element is greater than next element then swaps both elements.
+               int temp = arr[j+1];
+               arr[j+1] = arr[j];
+               arr[j] = temp;
+           }
+}
+
 int main(int argc, char *argv[])
 {
     int n;
     createArr();
     scanA(A);
     printA(A);
-    selectionSort(A);
+    bubbleSort(A);
     printA(A);
 }

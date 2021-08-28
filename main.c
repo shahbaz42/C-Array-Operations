@@ -76,11 +76,11 @@ int binarySearch(int arr[], int x, int lBound, int uBound)
         }
         if (arr[mid] > x)
         {
-            return binarySearch(arr, x, lBound, mid-1);
+            return binarySearch(arr, x, lBound, mid - 1);
         }
         else
         {
-            return binarySearch(arr, x, mid+1, uBound);
+            return binarySearch(arr, x, mid + 1, uBound);
         }
     }
     printf("Not Found ! \n");
@@ -142,10 +142,88 @@ void bubbleSort(int arr[])
 
 int main(int argc, char *argv[])
 {
-    int n;
+    int n, x;
+
     createArr();
     scanA(A);
+    printf("arr : ");
     printA(A);
-    binarySearch(A, 5, 0, sizeArr - 1);
-    
+
+    while (1 == 1)
+    {
+        printf("______________________________________\n");
+        printf("1. Insertion \n");
+        printf("2. Deletion \n");
+        printf("3. Searching \n");
+        printf("4. Sorting \n");
+        printf("5. Traversal \n");
+        printf("6. Merging two sorted arrays \n");
+        printf("______________________________________\n");
+        printf("What do you want to do : ");
+        scanf("%d", &n);
+
+        switch (n)
+        {
+        case 1:
+            printf("_____Insertion_____ \n");
+            printf("What do you want to insert : ");
+            scanf("%d", &x);
+            insert(A, x);
+            printf("Array after inserting : ");
+            printA(A);
+            break;
+
+        case 2:
+            printf("_____Deletion_____ \n");
+            delete (A);
+            printf("Array after deletion : ");
+            printA(A);
+            break;
+
+        case 3:
+            printf("_____Searching_____ \n");
+            printf("What do you want to search : ");
+            scanf("%d", &x);
+
+            printf("Enter 1 for linear search, 2 for binary search :");
+            scanf("%d", &n);
+            (n == 1) ? linearSearch(A, x) : binarySearch(A, x, 0, sizeArr); //using terniary operators for if else
+            printf("in Array : ");
+            printA(A);
+            break;
+
+        case 4:
+            printf("_____Sorting_____ \n");
+            printf("How do you want to sort?\n ");
+            printf("Enter 1 for Insertion sort, 2 for Selection Sort \nand 3 for Bubble Sort : ");
+            scanf("%d", &x);
+            if (x == 1)
+                insertionSort(A);
+            if (x == 2)
+                selectionSort(A);
+            if (x == 3)
+                bubbleSort(A);
+
+            printf("Array after sorting : ");
+            printA(A);
+            break;
+
+        case 5:
+            printf("_____Traversal_____ \n");
+            printf("Printing array after traversal : ");
+            printA(A);
+            break;
+
+        case 6:
+            printf("Work in progress..");
+            break;
+
+        default:
+            printf("Wrong choice");
+            break;
+        }
+        printf("\n Press 1 to continue...");
+        scanf("%d", &x);
+
+    }
 }

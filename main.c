@@ -46,16 +46,24 @@ void delete(int arr[]){
     A = (int*)realloc(A, --sizeArr*sizeof(int) );
 }
 
+void linearSearch(int arr[], int x){
+    int found = 0;
+    for (int i = 0; i < sizeArr; i++)
+    {
+        if (arr[i]==x){
+            printf("Found at position %d.\n", i);
+            found = 1;
+        } 
+    }  
+    if (found == 0)
+        printf("Not Found.");
+}
+
 int main(int argc, char *argv[])                            // Driver code
 {   
     int n;
     createArr();
     scanA(A);
     printA(A);
-    insert(A, 42);
-    printA(A);
-    delete(A);
-    printA(A);
-
-    
+    linearSearch(A, 42);
 }

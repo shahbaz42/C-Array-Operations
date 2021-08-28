@@ -59,11 +59,30 @@ void linearSearch(int arr[], int x){                         // linear searches 
         printf("Not Found.");
 }
 
+void insertionSort(int arr[]){
+    // [1,8,5,3,1,2]
+    //  0,1,2,3,4,5
+    for (int i = 1; i < sizeArr; i++)
+    {
+        int key = arr[i]; //3                                // key = arr[i] is being moved
+        int j = i-1;      //2                                // j is the place for checking if key can be moved to j or not. 
+
+        while(j>=0 && arr[j]>key){
+            arr[j+1]=arr[j];                                 // shifts element at j to j+1 position and decrements j
+            j--;                                             // 
+        }
+        arr[j+1]=key;                                        // if key is greater than jth element then j+1 th element becomes key 
+    }
+    
+}
+
+
 int main(int argc, char *argv[])                            
 {   
     int n;
     createArr();
     scanA(A);
     printA(A);
-    linearSearch(A, 42);
+    insertionSort(A);
+    printA(A);
 }

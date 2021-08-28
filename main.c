@@ -18,7 +18,7 @@ void createArr() // creating array of size sizeArr
         printf("Sucessfully created array.\n");
 }
 
-void scanA(int arr[]) // Function for taking input in our array
+void scanA(int arr[], int sizeArr) // Function for taking input in our array
 {
     for (int i = 0; i < sizeArr; i++) // taking input in the array
     {
@@ -27,7 +27,7 @@ void scanA(int arr[]) // Function for taking input in our array
     }
 }
 
-void printA(int arr[]) // function for printing an array
+void printA(int arr[], int sizeArr) // function for printing an array
 {
     printf("[ %d", arr[0]);
     for (int i = 1; i < sizeArr; i++)
@@ -48,7 +48,7 @@ void delete (int arr[])
     A = (int *)realloc(A, --sizeArr * sizeof(int));
 }
 
-void linearSearch(int arr[], int x)
+void linearSearch(int arr[], int sizeArr, int x)
 { // linear searches and prints index number is found
     int found = 0;
     for (int i = 0; i < sizeArr; i++)
@@ -63,7 +63,7 @@ void linearSearch(int arr[], int x)
         printf("Not Found.\n");
 }
 
-int binarySearch(int arr[], int x, int lBound, int uBound)
+int binarySearch(int arr[], int sizeArr, int x, int lBound, int uBound)
 { // for searching from a sorted array
     // ["1 2 3 4 5" 6 7 8 9 10]   size = 10 uBound = 9   x= 3
     if (uBound >= lBound)
@@ -76,18 +76,18 @@ int binarySearch(int arr[], int x, int lBound, int uBound)
         }
         if (arr[mid] > x)
         {
-            return binarySearch(arr, x, lBound, mid - 1);
+            return binarySearch(arr, sizeArr, x, lBound, mid - 1);
         }
         else
         {
-            return binarySearch(arr, x, mid + 1, uBound);
+            return binarySearch(arr, sizeArr, x, mid + 1, uBound);
         }
     }
     printf("Not Found ! \n");
     return -1;
 }
 
-void insertionSort(int arr[])
+void insertionSort(int arr[], int sizeArr)
 {
     // [1,8,5,3,1,2]
     //  0,1,2,3,4,5
@@ -105,7 +105,7 @@ void insertionSort(int arr[])
     }
 }
 
-void selectionSort(int arr[])
+void selectionSort(int arr[], int sizeArr)
 {
     //[1,5,3,6,4]
     for (int j = 0; j < sizeArr; j++) // j is the selector at which min of arr[j ... sizeArr] will be placed
@@ -126,7 +126,7 @@ void selectionSort(int arr[])
     }
 }
 
-void bubbleSort(int arr[])
+void bubbleSort(int arr[], int sizeArr)
 {
     int i, j;
     for (i = 0; i < sizeArr - 1; i++)
@@ -140,14 +140,43 @@ void bubbleSort(int arr[])
             }
 }
 
-int main(int argc, char *argv[])
+void merge(int arr1[], int size1, int arr2[], int size2)
+{ //merges arr2 into arr1
+    A = (int *)realloc(A, (size1 + size2) * sizeof(int));     // increases size to accomodate arr2
+    sizeArr = size1 + size2 ;
+    for (int i = 0; i < size2; i++)
+    {
+        arr1[size1 + i] = arr2[i];
+    }
+}
+
+void mergeArrays()                                           
+{   
+    int size2;
+    printf("Arr1 is : ");
+    printA(A, sizeArr);
+    printf("Enter the size of Arr2 : ");
+    scanf("%d", &size2);
+    int Arr2[size2];
+    scanA(Arr2, size2);
+    printf("Arr2 is : ");
+    printA(Arr2, size2);
+    printf("After merging : ");
+    merge(A, sizeArr, Arr2, size2);
+    printA(A, sizeArr );
+    printf("sorted merged Array: ");
+    bubbleSort(A, sizeArr);
+    printA(A, sizeArr );
+}
+
+int main(int argc, char *argv[])                                 // driver code
 {
     int n, x;
 
     createArr();
-    scanA(A);
+    scanA(A, sizeArr);
     printf("arr : ");
-    printA(A);
+    printA(A, sizeArr);
 
     while (1 == 1)
     {
@@ -170,14 +199,14 @@ int main(int argc, char *argv[])
             scanf("%d", &x);
             insert(A, x);
             printf("Array after inserting : ");
-            printA(A);
+            printA(A, sizeArr);
             break;
 
         case 2:
             printf("_____Deletion_____ \n");
             delete (A);
             printf("Array after deletion : ");
-            printA(A);
+            printA(A, sizeArr);
             break;
 
         case 3:
@@ -187,9 +216,9 @@ int main(int argc, char *argv[])
 
             printf("Enter 1 for linear search, 2 for binary search :");
             scanf("%d", &n);
-            (n == 1) ? linearSearch(A, x) : binarySearch(A, x, 0, sizeArr); //using terniary operators for if else
+            (n == 1) ? linearSearch(A, sizeArr, x) : binarySearch(A, sizeArr, x, 0, sizeArr); //using terniary operators for if else
             printf("in Array : ");
-            printA(A);
+            printA(A, sizeArr);
             break;
 
         case 4:
@@ -198,24 +227,25 @@ int main(int argc, char *argv[])
             printf("Enter 1 for Insertion sort, 2 for Selection Sort \nand 3 for Bubble Sort : ");
             scanf("%d", &x);
             if (x == 1)
-                insertionSort(A);
+                insertionSort(A, sizeArr);
             if (x == 2)
-                selectionSort(A);
+                selectionSort(A, sizeArr);
             if (x == 3)
-                bubbleSort(A);
+                bubbleSort(A, sizeArr);
 
             printf("Array after sorting : ");
-            printA(A);
+            printA(A, sizeArr);
             break;
 
         case 5:
             printf("_____Traversal_____ \n");
             printf("Printing array after traversal : ");
-            printA(A);
+            printA(A, sizeArr);
             break;
 
         case 6:
-            printf("Work in progress..");
+            mergeArrays();
+
             break;
 
         default:
@@ -224,6 +254,5 @@ int main(int argc, char *argv[])
         }
         printf("\n Press 1 to continue...");
         scanf("%d", &x);
-
     }
 }
